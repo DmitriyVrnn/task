@@ -1,5 +1,12 @@
 import axios from 'axios';
-import {FETCH_USER, API} from "../constants";
+import {FETCH_USER, API, CHANGE_ACTIVE_USER} from "../constants";
+
+export const changeActiveUser = (id) => {
+  return {
+    type: CHANGE_ACTIVE_USER,
+    id
+  };
+};
 
 export const fetchAllUsers = () => async (dispatch) => {
   const fetchUsers = (users) => {

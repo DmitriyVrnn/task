@@ -1,13 +1,14 @@
 import React from 'react';
 
-import UserContainer from './containers/UserContainer'
+import './App.css';
+import Container from './containers/Container'
 
-function App() {
+const App = () => {
   return (
-      <div>
-        <UserContainer/>
+      <div className="container">
+        <Container/>
       </div>
   );
-}
+};
 
 export default App;

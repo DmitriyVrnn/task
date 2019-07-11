@@ -1,10 +1,11 @@
 import React from 'react';
 
-const User = ({user: {name, surname}}) => {
+const User = ({user: {name, surname, id, vacancy}, activeUserChanged}) => {
   return(
-      <div>
+      <div onClick={() => activeUserChanged(id)}>
         <span>{name}</span>
         <span>{surname}</span>
+        <span>{vacancy}</span>
       </div>
   )
 };
