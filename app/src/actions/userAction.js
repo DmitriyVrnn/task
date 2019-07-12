@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_USERS, API, CHANGE_ACTIVE_USER, GET_USER_FROM_API} from "../constants";
+import {FETCH_USERS, API, CHANGE_ACTIVE_USER, GET_USER_FROM_API, ADD_COMMENT} from "../constants";
 
 //Убрать
 export const changeActiveUser = (id) => {
@@ -7,6 +7,10 @@ export const changeActiveUser = (id) => {
     type: CHANGE_ACTIVE_USER,
     id
   };
+};
+
+export const addComment = () => {
+
 };
 
 export const fetchAllUsers = () => async (dispatch) => {
@@ -27,7 +31,6 @@ export const fetchAllUsers = () => async (dispatch) => {
 
 export const getUser = (id) => async (dispatch) => {
   const fetchUser = (data) => {
-    console.log('data', data)
     dispatch({
       type: GET_USER_FROM_API,
       data
