@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchAllUsers} from "../../actions/userAction";
+import {fetchAllUsers, getUser} from "../../actions/userAction";
 import {Route, Switch} from 'react-router';
 import UserContainer from '../UserContainer';
 import UserInfo from '../../components/UserInfo';
@@ -12,15 +12,15 @@ class Container extends Component {
   };
 
   render() {
-    const {users, activeUser} = this.props;
+    const {user, getUserConnect} = this.props;
     return (
         <Switch>
           <Route path="/" component={UserContainer} exact/>
           <Route path="/:id" render={({match}) => {
             const {id} = match.params;
-            return (<UserInfo users={users}
-                              activeUser={activeUser}
-                              itemId={id}/>)
+            return (<UserInfo user={user}
+                              itemId={id}
+                              getUser={getUserConnect}/>)
           }}/>
         </Switch>
     )
@@ -28,7 +28,9 @@ class Container extends Component {
 }
 export default connect(state => ({
   users: state.users.userList,
-  activeUser: state.users.activeUser
+  activeUser: state.users.activeUser,
+  user: state.users.user
 }), {
   fetchAllUsersConnect: fetchAllUsers,
+  getUserConnect: getUser,
 })(Container)

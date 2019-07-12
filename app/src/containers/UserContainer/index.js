@@ -6,7 +6,6 @@ import {changeActiveUser} from "../../actions/userAction";
 import { withRouter } from 'react-router';
 
 class UserContainer extends React.Component{
-
   activeUserChanged = (id) => {
     const {changeActiveUserConnect} = this.props;
     changeActiveUserConnect(id);

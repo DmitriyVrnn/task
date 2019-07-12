@@ -1,4 +1,5 @@
 export const API = 'http://jg54r.mocklab.io';
 
-export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USERS = 'FETCH_USER';
+export const GET_USER_FROM_API = 'GET_USER_FROM_API';
 export const CHANGE_ACTIVE_USER = 'CHANGE_ACTIVE_USER';
