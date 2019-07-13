@@ -3,7 +3,6 @@ import uuid from 'uuid';
 
 import {FETCH_USERS, API, CHANGE_ACTIVE_USER, GET_USER_FROM_API, ADD_COMMENT} from "../constants";
 
-//Убрать
 export const changeActiveUser = (id) => {
   return {
     type: CHANGE_ACTIVE_USER,
