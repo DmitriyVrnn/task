@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import InputMask from 'react-input-mask';
+import {connect} from 'react-redux';
 
-import CommentList from '../CommentList'
+import CommentList from '../CommentList';
+import NewComments from '../NewComments';
+import {addComment} from "../../actions/userAction";
 import './styles.css';
 
 class UserInfo extends Component {
   state = {
     title: '',
     body: '',
-    phone: ''
+    phone: '',
+    isCorrect: true,
   };
 
   componentDidMount() {
@@ -31,7 +35,9 @@ class UserInfo extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { title, body, phone} = this.state;
+    const {title, body, phone} = this.state;
+    const {addCommentConnect} = this.props;
+    addCommentConnect({title, body, phone});
     this.setState({
       title: '',
       body: '',
@@ -45,19 +51,21 @@ class UserInfo extends Component {
     if (comments !== undefined) {
       let getLastFiveComments = comments.slice(Math.max(comments.length - 5, 1));
       return (<CommentList comments={getLastFiveComments}/>)
-    } else return null;
+    } else return (<p>Комментарии отсутствуют</p>);
   };
 
   render() {
     const {user} = this.props;
     const {name, surname, address, vacancy} = user;
-    const {title, body, phone} = this.state;
+    const {title, body, phone, isCorrect} = this.state;
+    const {comment} = this.props;
+    console.log(comment)
     return (
         <div className="user-info">
-          <span>{`Имя: ${name}`}</span>
-          <span>{`Фамилия: ${surname}`}</span>
-          <span>{`Вакансия: ${vacancy}`}</span>
-          <span>{`Адрес: ${address}`}</span>
+          <p>{`Имя: ${name}`}</p>
+          <p>{`Фамилия: ${surname}`}</p>
+          <p>{`Вакансия: ${vacancy}`}</p>
+          <p>{`Адрес: ${address}`}</p>
           <form className="form-post" onSubmit={this.handleSubmit}>
             <input type="text"
                    value={title}
@@ -76,12 +84,19 @@ class UserInfo extends Component {
                        value={phone}
                        onChange={this.handleInputChange('phone')}
                        required/>
-            <button className="btn-add_post" type="submit">Отправить</button>
+            <button className="btn-add_post" type="submit" disabled={isCorrect}>Отправить</button>
           </form>
-          {this.renderComments()}
+          <div className="comment-block">
+            <span>Новые комментраии</span>
+            <NewComments newComment={comment}/>
+            <span>Последние комментарии</span>
+            {this.renderComments()}
+          </div>
         </div>
     )
   }
 }
 
-export default UserInfo
+export default connect(state => ({
+  comment: state.comment
+}), {addCommentConnect: addComment})(UserInfo)

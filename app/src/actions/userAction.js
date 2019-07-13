@@ -1,4 +1,6 @@
 import axios from 'axios';
+import uuid from 'uuid';
+
 import {FETCH_USERS, API, CHANGE_ACTIVE_USER, GET_USER_FROM_API, ADD_COMMENT} from "../constants";
 
 //Убрать
@@ -9,8 +11,17 @@ export const changeActiveUser = (id) => {
   };
 };
 
-export const addComment = () => {
-
+export const addComment = data => {
+  console.log(data)
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      id: uuid(),
+      title: data.title,
+      body: data.body,
+      phone: data.phone,
+    },
+  }
 };
 
 export const fetchAllUsers = () => async (dispatch) => {

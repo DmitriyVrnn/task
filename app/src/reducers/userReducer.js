@@ -2,7 +2,7 @@ import {CHANGE_ACTIVE_USER, FETCH_USERS, GET_USER_FROM_API} from "../constants";
 
 const initialState = {
   userList: [],
-  user: {}
+  user: {},
 };
 
 export default (state = initialState, action) => {
