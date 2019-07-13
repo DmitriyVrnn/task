@@ -6,6 +6,7 @@ import CommentList from '../CommentList';
 import NewComments from '../NewComments';
 import {addComment} from "../../actions/userAction";
 import './styles.css';
+import Carousel from "../Carousel";
 
 class UserInfo extends Component {
   state = {
@@ -54,13 +55,14 @@ class UserInfo extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    const {user, users} = this.props;
     const {name, surname, address, vacancy} = user;
     const {title, body, phone} = this.state;
     const {comment} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <div className="user-info">
+          <Carousel users={users}/>
           <p>{`Имя: ${name}`}</p>
           <p>{`Фамилия: ${surname}`}</p>
           <p>{`Вакансия: ${vacancy}`}</p>

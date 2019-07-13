@@ -12,20 +12,23 @@ class Container extends Component {
   };
 
   render() {
-    const {user, getUserConnect} = this.props;
+    const {user, getUserConnect, users} = this.props;
     return (
         <Switch>
           <Route path="/" component={UserContainer} exact/>
           <Route path="/:id" render={({match}) => {
             const {id} = match.params;
-            return (<UserInfo user={user}
-                              itemId={id}
-                              getUser={getUserConnect}/>)
+            return (<UserInfo
+                users={users}
+                user={user}
+                itemId={id}
+                getUser={getUserConnect}/>)
           }}/>
         </Switch>
     )
   }
 }
+
 export default connect(state => ({
   users: state.users.userList,
   activeUser: state.users.activeUser,

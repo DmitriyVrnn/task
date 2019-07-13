@@ -1,0 +1,73 @@
+body {
+    font-family: Roboto, sans-serif;
+}
+
+/* Slide Componenet */
+.Slide-wrapper {
+    max-width: 960px;
+    width: 90%;
+    height: 100%;
+}
+
+/* Title */
+.Slide-title {
+    text-align: left;
+    padding: 8px;
+    margin: 0px;
+}
+
+.Slide-link {
+    color: #FF775F;
+}
+
+.Slide-link:hover {
+    color: #FF9683;
+}
+
+/* Body */
+.Slide-desc {
+    padding: 0px 8px 8px 8px;
+    margin: 0px;
+    text-align: left;
+}
+
+/* Images */
+.Slide-img {
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+}
+
+/* Slider Component */
+.Slider-wrapper {
+    width: 100%;
+    max-width: 960px;
+    min-height: 300px;
+    background: #FFD0C7;
+    display: flex;
+    align-items: center;
+}
+
+/* Left & Right Buttons */
+.Slider-prev, .Slider-next {
+    cursor: pointer;
+    width: 5%;
+    padding: 16px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.Slider-next {
+    border-radius: 5px 0 0 5px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.Slider-prev:hover, .Slider-next:hover {
+    background-color: #FF9683;
+}
