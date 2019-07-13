@@ -5,7 +5,7 @@ import {Route} from 'react-router';
 
 import CommentList from '../CommentList';
 import NewComments from '../NewComments';
-import {addComment} from "../../actions/userAction";
+import {addComment, clearStore} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
 
@@ -47,10 +47,12 @@ class UserInfo extends Component {
   };
 
   renderComments = () => {
-    const {user} = this.props;
+    const {user, commentConnect} = this.props;
     const {comments} = user;
     if (comments !== undefined) {
-      let getLastFiveComments = comments.slice(Math.max(comments.length - 5, 1));
+      // Объединение массивов комментариев с сервера и со стейта для отображения
+      let newCommentsArray = comments.concat(commentConnect);
+      let getLastFiveComments = newCommentsArray.slice(Math.max(newCommentsArray.length - 5, 1));
       return (<CommentList comments={getLastFiveComments}/>)
     } else return (<p>Комментарии отсутствуют</p>);
   };
@@ -59,15 +61,17 @@ class UserInfo extends Component {
     const {user, users, activeUserChanged, getUser} = this.props;
     const {name, surname, address, vacancy} = user;
     const {title, body, phone} = this.state;
-    const {comment} = this.props;
+    const {commentConnect, clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <div className="user-info">
           <Route path={'/:id'} render={() => {
             return (<Carousel users={users}
                               activeUserChanged={activeUserChanged}
-                              getUser={getUser}/>
-            )}}/>
+                              getUser={getUser}
+                              clearStore={clearStoreConnect}/>
+            )
+          }}/>
           <p>{`Имя: ${name}`}</p>
           <p>{`Фамилия: ${surname}`}</p>
           <p>{`Вакансия: ${vacancy}`}</p>
@@ -94,7 +98,7 @@ class UserInfo extends Component {
           </form>
           <div className="comment-block">
             <span>Новые комментарии</span>
-            <NewComments newComment={comment}/>
+            <NewComments newComment={commentConnect}/>
             <span>Последние комментарии</span>
             {this.renderComments()}
           </div>
@@ -104,5 +108,8 @@ class UserInfo extends Component {
 }
 
 export default connect(state => ({
-  comment: state.comment
-}), {addCommentConnect: addComment})(UserInfo)
+  commentConnect: state.comment
+}), {
+  addCommentConnect: addComment,
+  clearStoreConnect: clearStore
+})(UserInfo)

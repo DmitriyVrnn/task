@@ -14,13 +14,15 @@ const CommentList = ({comments}) => {
   return (
       <ul>
         {comments.map(item => {
-          return (
-              <li key={item.id}>
-                <Comment
-                    comment={item.comment}
-                />
-              </li>
-          )
+          if (item !== undefined) {
+            return (
+                <li key={item.id}>
+                  <Comment
+                      comment={item.comment}
+                  />
+                </li>
+            )
+          }
         })}
       </ul>
   )

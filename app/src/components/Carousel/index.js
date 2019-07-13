@@ -9,9 +9,10 @@ class Carousel extends Component {
   };
 
   handleClick = () => {
-    const {getUser, users} = this.props;
+    const {getUser, users, clearStore} = this.props;
     const {count} = this.state;
     getUser(users[count].id);
+    clearStore();
   };
 
   addState = (increment, lastSlide) => {

@@ -5,3 +5,5 @@ export const GET_USER_FROM_API = 'GET_USER_FROM_API';
 export const ADD_COMMENT = 'ADD_COMMENT';
 
 export const CHANGE_ACTIVE_USER = 'CHANGE_ACTIVE_USER';
+
+export const DEFAULT_STATE = 'DEFAULT_STATE';

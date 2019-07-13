@@ -1,7 +1,8 @@
 import axios from 'axios';
 import uuid from 'uuid';
 
-import {FETCH_USERS, API, CHANGE_ACTIVE_USER, GET_USER_FROM_API, ADD_COMMENT} from "../constants";
+import {FETCH_USERS, API, CHANGE_ACTIVE_USER,
+  GET_USER_FROM_API, ADD_COMMENT, DEFAULT_STATE} from "../constants";
 
 export const changeActiveUser = (id) => {
   return {
@@ -22,6 +23,10 @@ export const addComment = data => {
     },
   }
 };
+
+export const clearStore = () => ({
+  type: DEFAULT_STATE
+});
 
 export const fetchAllUsers = () => async (dispatch) => {
   const fetchUsers = (users) => {

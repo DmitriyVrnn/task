@@ -32,7 +32,8 @@ class Container extends Component {
                 users={users}
                 user={user}
                 itemId={id}
-                getUser={getUserConnect}/>)
+                getUser={getUserConnect}
+            />)
           }}/>
         </Switch>
     )
