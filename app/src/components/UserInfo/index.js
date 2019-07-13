@@ -12,7 +12,6 @@ class UserInfo extends Component {
     title: '',
     body: '',
     phone: '',
-    isCorrect: true,
   };
 
   componentDidMount() {
@@ -57,9 +56,9 @@ class UserInfo extends Component {
   render() {
     const {user} = this.props;
     const {name, surname, address, vacancy} = user;
-    const {title, body, phone, isCorrect} = this.state;
+    const {title, body, phone} = this.state;
     const {comment} = this.props;
-    console.log(comment)
+    const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <div className="user-info">
           <p>{`Имя: ${name}`}</p>
@@ -84,7 +83,7 @@ class UserInfo extends Component {
                        value={phone}
                        onChange={this.handleInputChange('phone')}
                        required/>
-            <button className="btn-add_post" type="submit" disabled={isCorrect}>Отправить</button>
+            <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
             <span>Новые комментраии</span>
