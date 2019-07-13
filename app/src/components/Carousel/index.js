@@ -8,6 +8,12 @@ class Carousel extends Component {
     count: 0
   };
 
+  handleClick = () => {
+    const {getUser, users} = this.props;
+    const {count} = this.state;
+    getUser(users[count].id);
+  };
+
   addState = (increment, lastSlide) => {
     const {count} = this.state;
     let currentSlide = count;
@@ -26,27 +32,36 @@ class Carousel extends Component {
   };
 
   render() {
-    const {users} = this.props;
+    const {users, activeUserChanged} = this.props;
     const {count} = this.state;
     return (
         <div className="Slider-wrapper">
-          {users !== undefined ? <>
-            <button
-                className="Slider-prev"
-                onClick={() => this.addState(-1, users.length - 1)}>
-              &#10094;
-            </button>
-            <div className="Slide-wrapper">
-              <h2 className="Slide-title">
-                {users[count] !== undefined ? <Link to={`/${users[count].id}`}>{users[count].name}</Link> : null}
-              </h2>
-            </div>
-            <button
-                className="Slider-next"
-                onClick={() => this.addState(1, users.length - 1)}>
-              &#10095;
-            </button>
-          </> : null}
+          {users !== undefined ?
+              <>
+                <button
+                    className="Slider-prev"
+                    onClick={() => this.addState(-1, users.length - 1)}>
+                  &#10094;
+                </button>
+                <div className="Slide-wrapper">
+                  <h2 className="Slide-title">
+                    {users[count] !== undefined ? (
+                        <>
+                          <Link onClick={this.handleClick} to={`/${users[count].id}`}>
+                            <div onClick={() => activeUserChanged(users[count].id)}>
+                              {users[count].name}
+                            </div>
+                          </Link>
+                        </>
+                    ) : null}
+                  </h2>
+                </div>
+                <button
+                    className="Slider-next"
+                    onClick={() => this.addState(1, users.length - 1)}>
+                  &#10095;
+                </button>
+              </> : null}
         </div>
     );
   }

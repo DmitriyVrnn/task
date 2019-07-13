@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import InputMask from 'react-input-mask';
 import {connect} from 'react-redux';
+import {Route} from 'react-router';
 
 import CommentList from '../CommentList';
 import NewComments from '../NewComments';
@@ -55,14 +56,18 @@ class UserInfo extends Component {
   };
 
   render() {
-    const {user, users} = this.props;
+    const {user, users, activeUserChanged, getUser} = this.props;
     const {name, surname, address, vacancy} = user;
     const {title, body, phone} = this.state;
     const {comment} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <div className="user-info">
-          <Carousel users={users}/>
+          <Route path={'/:id'} render={() => {
+            return (<Carousel users={users}
+                              activeUserChanged={activeUserChanged}
+                              getUser={getUser}/>
+            )}}/>
           <p>{`Имя: ${name}`}</p>
           <p>{`Фамилия: ${surname}`}</p>
           <p>{`Вакансия: ${vacancy}`}</p>
@@ -88,7 +93,7 @@ class UserInfo extends Component {
             <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
-            <span>Новые комментраии</span>
+            <span>Новые комментарии</span>
             <NewComments newComment={comment}/>
             <span>Последние комментарии</span>
             {this.renderComments()}

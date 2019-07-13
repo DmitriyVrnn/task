@@ -4,20 +4,16 @@ import {connect} from 'react-redux';
 import UserList from '../../components/UserList';
 import {changeActiveUser} from "../../actions/userAction";
 
-class UserContainer extends React.Component{
-  activeUserChanged = (id) => {
-    const {changeActiveUserConnect} = this.props;
-    changeActiveUserConnect(id);
-  };
-
-  render(){
-    const {users} = this.props;
-    return(
+class UserContainer extends React.Component {
+  render() {
+    const {users, activeUserChanged} = this.props;
+    return (
         <UserList users={users}
-                  activeUserChanged={this.activeUserChanged}/>
+                  activeUserChanged={activeUserChanged}/>
     )
   }
 }
+
 export default connect(state => ({
   users: state.users.userList,
 }), {
