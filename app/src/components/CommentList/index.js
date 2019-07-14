@@ -18,7 +18,9 @@ const CommentList = ({comments}) => {
             return (
                 <li key={item.id}>
                   <Comment
-                      comment={item.comment}
+                      title={item.title}
+                      phone={item.phone}
+                      comment={item.body}
                   />
                 </li>
             )

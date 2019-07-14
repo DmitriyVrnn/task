@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router';
 
 import CommentList from '../CommentList';
-import NewComments from '../NewComments';
+//import NewComments from '../NewComments';
 import {addComment, clearStore} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
@@ -48,18 +48,25 @@ class UserInfo extends Component {
 
   renderComments = () => {
     const {user, commentConnect} = this.props;
+    // TODO: Оставить просто comments
     const {comments} = user;
     if (comments !== undefined) {
       // Объединение массивов комментариев с сервера и со стейта для отображения
       let newCommentsArray = comments.concat(commentConnect);
       let getLastFiveComments = newCommentsArray.slice(Math.max(newCommentsArray.length - 5, 1));
-      return (<CommentList comments={getLastFiveComments}/>)
+      return (
+          <>
+            {/*<NewComments newComment={getLastFiveComments}/>*/}
+            <CommentList comments={getLastFiveComments}/>
+          </>
+      )
     } else return (<p>Комментарии отсутствуют</p>);
   };
 
   render() {
     const {user, users, activeUserChanged, getUser} = this.props;
-    const {name, surname, address, vacancy} = user;
+    const {name, surname, address, vacancy, avatar} = user;
+    console.log(user)
     const {title, body, phone} = this.state;
     const {commentConnect, clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
@@ -72,6 +79,7 @@ class UserInfo extends Component {
                               clearStore={clearStoreConnect}/>
             )
           }}/>
+          <img src={avatar} alt={name} title={name}/>
           <p>{`Имя: ${name}`}</p>
           <p>{`Фамилия: ${surname}`}</p>
           <p>{`Вакансия: ${vacancy}`}</p>
@@ -97,8 +105,7 @@ class UserInfo extends Component {
             <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
-            <span>Новые комментарии</span>
-            <NewComments newComment={commentConnect}/>
+            <span>Новые комменатрии</span>
             <span>Последние комментарии</span>
             {this.renderComments()}
           </div>

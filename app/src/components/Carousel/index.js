@@ -50,6 +50,7 @@ class Carousel extends Component {
                         <>
                           <Link onClick={this.handleClick} to={`/${users[count].id}`}>
                             <div onClick={() => activeUserChanged(users[count].id)}>
+                              <img src={users[count].avatar} alt={users[count].name}/>
                               {users[count].name}
                             </div>
                           </Link>
