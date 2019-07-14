@@ -8,6 +8,7 @@ import CommentList from '../CommentList';
 import {addComment, clearStore} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
+import User from "../User";
 
 class UserInfo extends Component {
   state = {
@@ -79,11 +80,13 @@ class UserInfo extends Component {
                               clearStore={clearStoreConnect}/>
             )
           }}/>
-          <img src={avatar} alt={name} title={name}/>
-          <p>{`Имя: ${name}`}</p>
-          <p>{`Фамилия: ${surname}`}</p>
-          <p>{`Вакансия: ${vacancy}`}</p>
-          <p>{`Адрес: ${address}`}</p>
+          <User
+              name={name}
+              surname={surname}
+              vacancy={vacancy}
+              avatar={avatar}
+              address={address}
+          />
           <form className="form-post" onSubmit={this.handleSubmit}>
             <input type="text"
                    value={title}

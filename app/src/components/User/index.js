@@ -1,12 +1,13 @@
 import React from 'react';
 
-const User = ({user: {name, surname, id, vacancy, avatar}, activeUserChanged}) => {
+const User = ({name, surname, id, vacancy, avatar, address, activeUserChanged}) => {
   return(
       <div onClick={() => activeUserChanged(id)}>
         <img src={avatar} alt={name} title={name}/>
-        <span>{name}</span>
-        <span>{surname}</span>
-        <span>{vacancy}</span>
+        <p>{name}</p>
+        <p>{surname}</p>
+        <p>{vacancy}</p>
+        <p>{address}</p>
       </div>
   )
 };

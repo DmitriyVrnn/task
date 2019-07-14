@@ -14,17 +14,22 @@ const UserList = ({users, activeUserChanged}) => {
 
   return (
       <ul>
-        {users.map(user => (
-            <li key={user.id}>
-              <Link to={`${user.id}`}>
-                <User
-                    key={user.id}
-                    user={user}
-                    activeUserChanged={activeUserChanged}
-                />
-              </Link>
-            </li>
-        ))}
+        {users.map(user => {
+          const {name, surname, vacancy, avatar, id} = user;
+          return (
+              <li key={id}>
+                <Link to={`${id}`}>
+                  <User
+                      name={name}
+                      surname={surname}
+                      vacancy={vacancy}
+                      avatar={avatar}
+                      activeUserChanged={activeUserChanged}
+                  />
+                </Link>
+              </li>
+          )
+        })}
       </ul>
   )
 };
