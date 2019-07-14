@@ -110,8 +110,7 @@ class UserInfo extends Component {
             <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
-            <span>Новые комменатрии</span>
-            <span>Последние комментарии</span>
+            <span>Комментарии</span>
             {this.renderComments()}
           </div>
         </div>
