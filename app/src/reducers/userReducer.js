@@ -3,7 +3,6 @@ import {ADD_USER, CHANGE_ACTIVE_USER, FETCH_USERS, GET_USER_FROM_API} from "../c
 const initialState = {
   userList: [],
   user: {},
-  userStore: [],
 };
 
 export default (state = initialState, action) => {
@@ -19,9 +18,10 @@ export default (state = initialState, action) => {
         user: action.data
       };
     case ADD_USER:
+      let users = state.userList;
       return {
           ...state,
-        userStore: action.payload
+        userList: [...users, action.payload]
       };
     case CHANGE_ACTIVE_USER:
       return {

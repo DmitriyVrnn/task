@@ -66,6 +66,7 @@ class UserInfo extends Component {
 
   render() {
     const {user, users, activeUserChanged, getUser, addUserConnect} = this.props;
+    console.log('mas', users)
     const {name, surname, address, vacancy, avatar} = user;
     console.log(user)
     const {title, body, phone} = this.state;
@@ -120,7 +121,6 @@ class UserInfo extends Component {
 
 export default connect(state => ({
   commentConnect: state.comment,
-  userStoreConnect: state.users.userStore
 }), {
   addCommentConnect: addComment,
   clearStoreConnect: clearStore,

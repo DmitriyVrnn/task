@@ -26,12 +26,12 @@ export const addComment = data => {
 };
 
 export const addUser = data => {
-  console.log(data)
   return {
     type: ADD_USER,
     payload: {
       id: uuid(),
-      name: data.name
+      name: data.name,
+      avatar: "https://www.gravatar.com/userimage/160584717/d4dffbc5c602fd15c4b4ffe1d27c0fc5?size=120",
     }
   }
 };
