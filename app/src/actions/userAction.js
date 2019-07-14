@@ -1,8 +1,10 @@
 import axios from 'axios';
 import uuid from 'uuid';
 
-import {FETCH_USERS, API, CHANGE_ACTIVE_USER,
-  GET_USER_FROM_API, ADD_COMMENT, DEFAULT_STATE} from "../constants";
+import {
+  FETCH_USERS, API, CHANGE_ACTIVE_USER,
+  GET_USER_FROM_API, ADD_COMMENT, DEFAULT_STATE, ADD_USER
+} from "../constants";
 
 export const changeActiveUser = (id) => {
   return {
@@ -12,7 +14,6 @@ export const changeActiveUser = (id) => {
 };
 
 export const addComment = data => {
-  console.log(data)
   return {
     type: ADD_COMMENT,
     payload: {
@@ -21,6 +22,17 @@ export const addComment = data => {
       body: data.body,
       phone: data.phone,
     },
+  }
+};
+
+export const addUser = data => {
+  console.log(data)
+  return {
+    type: ADD_USER,
+    payload: {
+      id: uuid(),
+      name: data.name
+    }
   }
 };
 

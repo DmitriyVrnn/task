@@ -1,11 +1,33 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+import Modal from '../Modal';
+import User from "../User";
+import AddUser from '../AddUser';
 import './styles.css';
 
 class Carousel extends Component {
   state = {
-    count: 0
+    count: 0,
+    isOpen: false,
+  };
+
+  openModal = () => {
+    this.setState({
+      isOpen: true
+    })
+  };
+
+  handleSubmit = () => {
+    this.setState({
+      isOpen: false
+    })
+  };
+
+  handleCancel = () => {
+    this.setState({
+      isOpen: false
+    })
   };
 
   handleClick = () => {
@@ -33,8 +55,8 @@ class Carousel extends Component {
   };
 
   render() {
-    const {users, activeUserChanged} = this.props;
-    const {count} = this.state;
+    const {users, activeUserChanged, addUser} = this.props;
+    const {count, isOpen} = this.state;
     return (
         <div className="Slider-wrapper">
           {users !== undefined ?
@@ -50,13 +72,22 @@ class Carousel extends Component {
                         <>
                           <Link onClick={this.handleClick} to={`/${users[count].id}`}>
                             <div onClick={() => activeUserChanged(users[count].id)}>
-                              <img src={users[count].avatar} alt={users[count].name}/>
-                              {users[count].name}
+                              <User avatar={users[count].avatar}
+                                    name={users[count].name}/>
                             </div>
                           </Link>
                         </>
                     ) : null}
                   </h2>
+                  <button onClick={this.openModal}>Добавить</button>
+                  <Modal
+                      title={'Добавить пользователя'}
+                      isOpen={isOpen}
+                      onCancel={this.handleCancel}
+                      onSubmit={this.handleSubmit}
+                  >
+                    <AddUser addUser={addUser}/>
+                  </Modal>
                 </div>
                 <button
                     className="Slider-next"

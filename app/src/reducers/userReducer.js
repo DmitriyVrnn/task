@@ -1,8 +1,9 @@
-import {CHANGE_ACTIVE_USER, FETCH_USERS, GET_USER_FROM_API} from "../constants";
+import {ADD_USER, CHANGE_ACTIVE_USER, FETCH_USERS, GET_USER_FROM_API} from "../constants";
 
 const initialState = {
   userList: [],
   user: {},
+  userStore: [],
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +17,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.data
+      };
+    case ADD_USER:
+      return {
+          ...state,
+        userStore: action.payload
       };
     case CHANGE_ACTIVE_USER:
       return {

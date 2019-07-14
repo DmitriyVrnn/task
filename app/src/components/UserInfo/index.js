@@ -5,7 +5,7 @@ import {Route} from 'react-router';
 
 import CommentList from '../CommentList';
 //import NewComments from '../NewComments';
-import {addComment, clearStore} from "../../actions/userAction";
+import {addComment, clearStore, addUser} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
 import User from "../User";
@@ -65,7 +65,7 @@ class UserInfo extends Component {
   };
 
   render() {
-    const {user, users, activeUserChanged, getUser} = this.props;
+    const {user, users, activeUserChanged, getUser, addUserConnect} = this.props;
     const {name, surname, address, vacancy, avatar} = user;
     console.log(user)
     const {title, body, phone} = this.state;
@@ -77,7 +77,8 @@ class UserInfo extends Component {
             return (<Carousel users={users}
                               activeUserChanged={activeUserChanged}
                               getUser={getUser}
-                              clearStore={clearStoreConnect}/>
+                              clearStore={clearStoreConnect}
+                              addUser={addUserConnect}/>
             )
           }}/>
           <User
@@ -118,8 +119,10 @@ class UserInfo extends Component {
 }
 
 export default connect(state => ({
-  commentConnect: state.comment
+  commentConnect: state.comment,
+  userStoreConnect: state.users.userStore
 }), {
   addCommentConnect: addComment,
-  clearStoreConnect: clearStore
+  clearStoreConnect: clearStore,
+  addUserConnect: addUser,
 })(UserInfo)

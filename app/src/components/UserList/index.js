@@ -19,13 +19,14 @@ const UserList = ({users, activeUserChanged}) => {
           return (
               <li key={id}>
                 <Link to={`${id}`}>
-                  <User
-                      name={name}
-                      surname={surname}
-                      vacancy={vacancy}
-                      avatar={avatar}
-                      activeUserChanged={activeUserChanged}
-                  />
+                  <div onClick={() => activeUserChanged(id)}>
+                    <User
+                        name={name}
+                        surname={surname}
+                        vacancy={vacancy}
+                        avatar={avatar}
+                    />
+                  </div>
                 </Link>
               </li>
           )
