@@ -90,6 +90,7 @@ class UserInfo extends Component {
                 address={address}
             />
           </div>
+          <h3>Написать комментарий</h3>
           <form className="form-post" onSubmit={this.handleSubmit}>
             <div className="block-inputs">
               <input type="text"
@@ -119,7 +120,7 @@ class UserInfo extends Component {
             <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
-            <span>Комментарии</span>
+            <h3 className="label-comments">Комментарии:</h3>
             {this.renderComments()}
           </div>
         </div>
