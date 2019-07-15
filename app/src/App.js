@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
+import {connect} from 'react-redux';
 
+import {fetchAllUsers} from "./actions/userAction";
 import './App.css';
 import Container from './containers/Container'
 
-const App = () => {
+const App = ({fetchAllUsersConnect}) => {
+  useEffect(() => {
+    fetchAllUsersConnect();
+  },[fetchAllUsersConnect]);
+
   return (
       <Router>
         <div className="container">
@@ -14,4 +20,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(null, {fetchAllUsersConnect: fetchAllUsers,})(App);

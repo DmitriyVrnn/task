@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import InputMask from 'react-input-mask';
 import {connect} from 'react-redux';
 import {Route} from 'react-router';
+import { bindActionCreators } from 'redux'
 
 import CommentList from '../CommentList';
 import {addComment, clearCommentFromStore} from "../../actions/commentAction";
-import {addUser} from "../../actions/userAction";
+import {addUser, changeActiveUser, getUser} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
 import User from "../User";
@@ -18,8 +19,8 @@ class UserInfo extends Component {
   };
 
   componentDidMount() {
-    const {itemId, getUser} = this.props;
-    getUser(itemId);
+    const {itemId, getUserConnect} = this.props;
+    getUserConnect(itemId);
   };
 
   handleInputChange = type => e => {
@@ -33,6 +34,11 @@ class UserInfo extends Component {
       default:
         return null;
     }
+  };
+
+  activeUserChanged = (id) => {
+    const {changeActiveUserConnect} = this.props;
+    changeActiveUserConnect(id);
   };
 
   handleSubmit = (e) => {
@@ -61,17 +67,16 @@ class UserInfo extends Component {
   };
 
   render() {
-    const {user, users, activeUserChanged, getUser, addUserConnect} = this.props;
+    const {user, users, getUserConnect, addUserConnect, clearStoreConnect} = this.props;
     const {name, surname, address, vacancy, avatar} = user;
     const {title, body, phone} = this.state;
-    const {clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <>
           <Route path={'/:id'} render={() => {
             return (<Carousel users={users}
-                              activeUserChanged={activeUserChanged}
-                              getUser={getUser}
+                              activeUserChanged={this.activeUserChanged}
+                              getUser={getUserConnect}
                               clearStore={clearStoreConnect}
                               addUser={addUserConnect}/>
             )
@@ -125,11 +130,16 @@ class UserInfo extends Component {
   }
 }
 
-export default connect(state => ({
+const mapStateToProps = (state) => ({
   commentConnect: state.comment,
   users: state.users.userList,
-}), {
+  user: state.users.user
+});
+
+export default connect(mapStateToProps, {
   addCommentConnect: addComment,
+  changeActiveUserConnect: changeActiveUser,
   clearStoreConnect: clearCommentFromStore,
   addUserConnect: addUser,
+  getUserConnect: getUser,
 })(UserInfo)

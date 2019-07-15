@@ -17,9 +17,9 @@ const CommentList = ({comments}) => {
         {comments.map(item => {
           if (item !== undefined) {
             return (
-                <article className="comment-wrapper">
-                  <li className="comment"
-                      key={item.id}>
+                <article className="comment-wrapper"
+                         key={item.id}>
+                  <li className="comment">
                     <Comment
                         title={item.title}
                         phone={item.phone}
