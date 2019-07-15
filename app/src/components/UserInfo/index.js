@@ -49,27 +49,22 @@ class UserInfo extends Component {
 
   renderComments = () => {
     const {user, commentConnect} = this.props;
-    // TODO: Оставить просто comments
     const {comments} = user;
     if (comments !== undefined) {
       // Объединение массивов комментариев с сервера и со стейта для отображения
       let newCommentsArray = comments.concat(commentConnect);
       let getLastFiveComments = newCommentsArray.slice(Math.max(newCommentsArray.length - 5, 1));
       return (
-          <>
-            {/*<NewComments newComment={getLastFiveComments}/>*/}
-            <CommentList comments={getLastFiveComments}/>
-          </>
+          <CommentList comments={getLastFiveComments}/>
       )
     } else return (<p>Комментарии отсутствуют</p>);
   };
 
   render() {
     const {user, users, activeUserChanged, getUser, addUserConnect} = this.props;
-    console.log('mas', users)
     const {name, surname, address, vacancy, avatar} = user;
     const {title, body, phone} = this.state;
-    const {commentConnect, clearStoreConnect} = this.props;
+    const {clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <>
@@ -132,6 +127,7 @@ class UserInfo extends Component {
 
 export default connect(state => ({
   commentConnect: state.comment,
+  users: state.users.userList,
 }), {
   addCommentConnect: addComment,
   clearStoreConnect: clearCommentFromStore,

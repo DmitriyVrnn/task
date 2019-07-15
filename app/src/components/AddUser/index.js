@@ -1,46 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './styles.css';
 
-export default class AddUser extends React.Component {
-  state = {
-    name: ''
+const AddUser = ({addUser, onSubmit}) => {
+  const [name, setName] = useState('');
+
+  const handleInputChange = (e) => {
+    setName(e.target.value)
   };
 
-  handleInputChange = (e) => {
-    this.setState({
-      name: e.target.value
-    })
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) =>{
     e.preventDefault();
-    const {name} = this.state;
-    const {addUser, onSubmit} = this.props;
     addUser({name});
-    this.setState({
-      name: ''
-    });
+    setName('');
     onSubmit()
   };
 
-  render() {
-    const {name} = this.state;
-    return (
-        <form onSubmit={this.handleSubmit}
-              className="modal-form">
-          <input type="text"
-                 className="input-name"
-                 placeholder="Имя"
-                 value={name}
-                 onChange={this.handleInputChange}
-                 required/>
-          <button
-              className="btn-modal-submit"
-              type="submit">
-            Добавить
-          </button>
-        </form>
-    )
-  }
-}
+  return (
+      <form onSubmit={handleSubmit}
+            className="modal-form">
+        <input type="text"
+               className="input-name"
+               placeholder="Имя"
+               value={name}
+               onChange={handleInputChange}
+               required/>
+        <button
+            className="btn-modal-submit"
+            type="submit">
+          Добавить
+        </button>
+      </form>
+  )
+};
+
+export default AddUser;

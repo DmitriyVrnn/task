@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import Modal from '../Modal';
@@ -6,104 +6,85 @@ import User from "../User";
 import AddUser from '../AddUser';
 import './styles.css';
 
-class Carousel extends Component {
-  state = {
-    count: 0,
-    isOpen: false,
+const Carousel = ({users, activeUserChanged, addUser, getUser, clearStore}) => {
+  const [count, setCount] = useState(0);
+  const [isOpen, setOpen] = useState(false);
+  const isActive = true;
+
+  const openModal = () => {
+    setOpen(true)
   };
 
-  openModal = () => {
-    this.setState({
-      isOpen: true
-    })
+  const handleSubmit = () => {
+    setOpen(false)
   };
 
-  handleSubmit = () => {
-    this.setState({
-      isOpen: false
-    })
+  const handleCancel = () => {
+    setOpen(false);
   };
 
-  handleCancel = () => {
-    this.setState({
-      isOpen: false
-    })
-  };
-
-  handleClick = () => {
-    const {getUser, users, clearStore} = this.props;
-    const {count} = this.state;
+  const handleClick = () => {
     getUser(users[count].id);
     clearStore();
   };
 
-  addState = (increment, lastSlide) => {
-    const {count} = this.state;
+  const moveSlide = (increment, lastSlide) => {
     let currentSlide = count;
     if (currentSlide === lastSlide && increment === 1) {
-      this.setState({
-        count: 0
-      });
+      setCount(0);
     } else if (currentSlide === lastSlide && increment === -1) {
-      this.setState({
-        count: count + increment
-      });
+      setCount(count + increment);
     } else if (currentSlide === 0 && increment === -1)
-      this.setState({count: lastSlide});
+      setCount(lastSlide);
     else if (currentSlide < lastSlide)
-      this.setState({count: count + increment});
+      setCount(count + increment);
   };
 
-  render() {
-    const {users, activeUserChanged, addUser} = this.props;
-    const {count, isOpen} = this.state;
-    let isActive = true;
-    return (
-        <div className="slider-wrapper">
-          {users !== undefined ?
-              <>
-                <button
-                    className="slider-prev"
-                    onClick={() => this.addState(-1, users.length - 1)}>
-                  &#10094;
+  return (
+      <div className="slider-wrapper">
+        {users !== undefined ?
+            <>
+              <button
+                  className="slider-prev"
+                  onClick={() => moveSlide(-1, users.length - 1)}>
+                &#10094;
+              </button>
+              <div className="slide-wrapper">
+                {users[count] !== undefined ? (
+                    <>
+                      <div className="slide-info"
+                           onClick={() => activeUserChanged(users[count].id)}>
+                        <Link onClick={handleClick} to={`/${users[count].id}`}>
+                          <User
+                              isActive={isActive}
+                              avatar={users[count].avatar}
+                              name={users[count].name}/>
+                        </Link>
+                      </div>
+                    </>
+                ) : null}
+                <button className="btn-modal"
+                        onClick={openModal}>
+                  <i className="fas fa-plus"></i>
+                  Добавить пользователя
                 </button>
-                <div className="slide-wrapper">
-                  {users[count] !== undefined ? (
-                      <>
-                        <div className="slide-info"
-                             onClick={() => activeUserChanged(users[count].id)}>
-                          <Link onClick={this.handleClick} to={`/${users[count].id}`}>
-                            <User
-                                isActive={isActive}
-                                avatar={users[count].avatar}
-                                name={users[count].name}/>
-                          </Link>
-                        </div>
-                      </>
-                  ) : null}
-                  <button className="btn-modal"
-                          onClick={this.openModal}>
-                    <i className="fas fa-plus"></i>
-                    Добавить пользователя
-                  </button>
-                  <Modal
-                      title={'Добавить пользователя'}
-                      isOpen={isOpen}
-                      onCancel={this.handleCancel}
-                  >
-                    <AddUser addUser={addUser}
-                             onSubmit={this.handleSubmit}/>
-                  </Modal>
-                </div>
-                <button
-                    className="slider-next"
-                    onClick={() => this.addState(1, users.length - 1)}>
-                  &#10095;
-                </button>
-              </> : null}
-        </div>
-    );
-  }
-}
+                <Modal
+                    title={'Добавить пользователя'}
+                    isOpen={isOpen}
+                    onCancel={handleCancel}
+                >
+                  <AddUser addUser={addUser}
+                           onSubmit={handleSubmit}/>
+                </Modal>
+              </div>
+              <button
+                  className="slider-next"
+                  onClick={() => moveSlide(1, users.length - 1)}>
+                &#10095;
+              </button>
+            </> : null}
+      </div>
+  );
+};
 
-export default Carousel
+export default Carousel;

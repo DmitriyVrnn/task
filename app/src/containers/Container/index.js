@@ -29,7 +29,6 @@ class Container extends Component {
             const {id} = match.params;
             return (<UserInfo
                 activeUserChanged={this.activeUserChanged}
-                users={users}
                 user={user}
                 itemId={id}
                 getUser={getUserConnect}
@@ -41,7 +40,6 @@ class Container extends Component {
 }
 
 export default connect(state => ({
-  users: state.users.userList,
   activeUser: state.users.activeUser,
   user: state.users.user
 }), {
