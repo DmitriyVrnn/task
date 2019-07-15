@@ -2,29 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Portal from '../Portal';
-import './styles.css'
+import './styles.css';
 
-const Modal = ({title, isOpen, onCancel, children}) => (
-    <>
-      {isOpen && (
-          <Portal>
-            <div className="modal-overlay">
-              <div className="modal-window">
-                <div className="modal-header">
-                  <div className="modal-title">{title}</div>
-                </div>
-                <div className="modal-body">
-                  {children}
-                </div>
-                <div className="modal-footer">
-                  <button onClick={onCancel}><i className="fas fa-times-circle"></i></button>
-                </div>
-              </div>
+const Modal = ({
+  title, isOpen, onCancel, children,
+}) => (
+  <>
+    {isOpen && (
+      <Portal>
+        <div className="modal-overlay">
+          <div className="modal-window">
+            <div className="modal-header">
+              <div className="modal-title">{title}</div>
             </div>
-          </Portal>
-      )
+            <div className="modal-body">
+              {children}
+            </div>
+            <div className="modal-footer">
+              <button onClick={onCancel}><i className="fas fa-times-circle" /></button>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    )
       }
-    </>
+  </>
 );
 
 Modal.propTypes = {

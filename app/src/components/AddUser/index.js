@@ -1,37 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 
-const AddUser = ({addUser, onSubmit}) => {
+const AddUser = ({ addUser, onSubmit }) => {
   const [name, setName] = useState('');
 
   const handleInputChange = (e) => {
-    setName(e.target.value)
+    setName(e.target.value);
   };
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    addUser({name});
+    addUser({ name });
     setName('');
-    onSubmit()
+    onSubmit();
   };
 
   return (
-      <form onSubmit={handleSubmit}
-            className="modal-form">
-        <input type="text"
-               className="input-name"
-               placeholder="Имя"
-               value={name}
-               onChange={handleInputChange}
-               required/>
-        <button
-            className="btn-modal-submit"
-            type="submit">
+    <form
+      onSubmit={handleSubmit}
+      className="modal-form"
+    >
+      <input
+        type="text"
+        className="input-name"
+        placeholder="Имя"
+        value={name}
+        onChange={handleInputChange}
+        required
+      />
+      <button
+        className="btn-modal-submit"
+        type="submit"
+      >
           Добавить
-        </button>
-      </form>
-  )
+      </button>
+    </form>
+  );
 };
 
 export default AddUser;
+
+AddUser.propTypes = {
+  addUser: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};

@@ -1,4 +1,4 @@
-import {ADD_COMMENT, DEFAULT_STATE} from "../constants";
+import { ADD_COMMENT, DEFAULT_STATE } from '../constants';
 
 const comment = [];
 
