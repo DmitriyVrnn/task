@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 
+import './styles.css';
 import User from '../User'
 
 const UserList = ({users, activeUserChanged}) => {
@@ -13,25 +14,28 @@ const UserList = ({users, activeUserChanged}) => {
   }
 
   return (
-      <ul>
-        {users.map(user => {
-          const {name, surname, vacancy, avatar, id} = user;
-          return (
-              <li key={id}>
-                <Link to={`${id}`}>
-                  <div onClick={() => activeUserChanged(id)}>
+      <section className="list">
+        <ul className="list-users">
+          {users.map(user => {
+            const {name, surname, vacancy, avatar, id} = user;
+            return (
+                <Link key={id}
+                      to={`${id}`}>
+                  <li className="list-item"
+                      onClick={() => activeUserChanged(id)}>
                     <User
                         name={name}
                         surname={surname}
                         vacancy={vacancy}
                         avatar={avatar}
+                        isHidden={true}
                     />
-                  </div>
+                  </li>
                 </Link>
-              </li>
-          )
-        })}
-      </ul>
+            )
+          })}
+        </ul>
+      </section>
   )
 };
 

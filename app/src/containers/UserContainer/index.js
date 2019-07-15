@@ -8,8 +8,8 @@ class UserContainer extends React.Component {
   render() {
     const {users, activeUserChanged} = this.props;
     return (
-        <UserList users={users}
-                  activeUserChanged={activeUserChanged}/>
+          <UserList users={users}
+                    activeUserChanged={activeUserChanged}/>
     )
   }
 }

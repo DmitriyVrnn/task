@@ -57,6 +57,7 @@ class Carousel extends Component {
   render() {
     const {users, activeUserChanged, addUser} = this.props;
     const {count, isOpen} = this.state;
+    let isActive = true;
     return (
         <div className="Slider-wrapper">
           {users !== undefined ?
@@ -72,7 +73,9 @@ class Carousel extends Component {
                         <>
                           <Link onClick={this.handleClick} to={`/${users[count].id}`}>
                             <div onClick={() => activeUserChanged(users[count].id)}>
-                              <User avatar={users[count].avatar}
+                              <User
+                                    isActive={isActive}
+                                    avatar={users[count].avatar}
                                     name={users[count].name}/>
                             </div>
                           </Link>

@@ -68,7 +68,6 @@ class UserInfo extends Component {
     const {user, users, activeUserChanged, getUser, addUserConnect} = this.props;
     console.log('mas', users)
     const {name, surname, address, vacancy, avatar} = user;
-    console.log(user)
     const {title, body, phone} = this.state;
     const {commentConnect, clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
@@ -82,31 +81,41 @@ class UserInfo extends Component {
                               addUser={addUserConnect}/>
             )
           }}/>
-          <User
-              name={name}
-              surname={surname}
-              vacancy={vacancy}
-              avatar={avatar}
-              address={address}
-          />
-          <form className="form-post" onSubmit={this.handleSubmit}>
-            <input type="text"
-                   value={title}
-                   onChange={this.handleInputChange('title')}
-                   required/>
-            <textarea
-                cols="21"
-                rows="10"
-                placeholder="Введите сообщение..."
-                name="body"
-                onChange={this.handleInputChange('body')}
-                value={body}
-                required
+          <div className="user-block-info">
+            <User
+                name={name}
+                surname={surname}
+                vacancy={vacancy}
+                avatar={avatar}
+                address={address}
             />
-            <InputMask mask="+7 (999) 999-99-99"
-                       value={phone}
-                       onChange={this.handleInputChange('phone')}
-                       required/>
+          </div>
+          <form className="form-post" onSubmit={this.handleSubmit}>
+            <div className="block-inputs">
+              <input type="text"
+                     className="input-title"
+                     placeholder="Введите заголовок"
+                     value={title}
+                     onChange={this.handleInputChange('title')}
+                     required/>
+              <textarea
+                  cols="21"
+                  rows="10"
+                  placeholder="Введите сообщение..."
+                  name="body"
+                  className="input-body"
+                  onChange={this.handleInputChange('body')}
+                  value={body}
+                  required
+              />
+              <InputMask
+                  className="input-phone"
+                  placeholder="Введите телефон"
+                  mask="+7 (999) 999-99-99"
+                  value={phone}
+                  onChange={this.handleInputChange('phone')}
+                  required/>
+            </div>
             <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
           </form>
           <div className="comment-block">
