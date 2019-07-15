@@ -72,7 +72,7 @@ class UserInfo extends Component {
     const {commentConnect, clearStoreConnect} = this.props;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
-        <div className="user-info">
+        <>
           <Route path={'/:id'} render={() => {
             return (<Carousel users={users}
                               activeUserChanged={activeUserChanged}
@@ -81,49 +81,51 @@ class UserInfo extends Component {
                               addUser={addUserConnect}/>
             )
           }}/>
-          <div className="user-block-info">
-            <User
-                name={name}
-                surname={surname}
-                vacancy={vacancy}
-                avatar={avatar}
-                address={address}
-            />
-          </div>
-          <h3>Написать комментарий</h3>
-          <form className="form-post" onSubmit={this.handleSubmit}>
-            <div className="block-inputs">
-              <input type="text"
-                     className="input-title"
-                     placeholder="Введите заголовок"
-                     value={title}
-                     onChange={this.handleInputChange('title')}
-                     required/>
-              <textarea
-                  cols="21"
-                  rows="10"
-                  placeholder="Введите сообщение..."
-                  name="body"
-                  className="input-body"
-                  onChange={this.handleInputChange('body')}
-                  value={body}
-                  required
+          <div className="user-info">
+            <div className="user-block-info">
+              <User
+                  name={name}
+                  surname={surname}
+                  vacancy={vacancy}
+                  avatar={avatar}
+                  address={address}
               />
-              <InputMask
-                  className="input-phone"
-                  placeholder="Введите телефон"
-                  mask="+7 (999) 999-99-99"
-                  value={phone}
-                  onChange={this.handleInputChange('phone')}
-                  required/>
             </div>
-            <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
-          </form>
-          <div className="comment-block">
-            <h3 className="label-comments">Комментарии:</h3>
-            {this.renderComments()}
+            <h3>Написать комментарий</h3>
+            <form className="form-post" onSubmit={this.handleSubmit}>
+              <div className="block-inputs">
+                <input type="text"
+                       className="input-title"
+                       placeholder="Введите заголовок"
+                       value={title}
+                       onChange={this.handleInputChange('title')}
+                       required/>
+                <textarea
+                    cols="21"
+                    rows="10"
+                    placeholder="Введите сообщение..."
+                    name="body"
+                    className="input-body"
+                    onChange={this.handleInputChange('body')}
+                    value={body}
+                    required
+                />
+                <InputMask
+                    className="input-phone"
+                    placeholder="Введите телефон"
+                    mask="+7 (999) 999-99-99"
+                    value={phone}
+                    onChange={this.handleInputChange('phone')}
+                    required/>
+              </div>
+              <button className="btn-add_post" type="submit" disabled={!enabledBtn}>Отправить</button>
+            </form>
+            <div className="comment-block">
+              <h3 className="label-comments">Комментарии:</h3>
+              {this.renderComments()}
+            </div>
           </div>
-        </div>
+        </>
     )
   }
 }

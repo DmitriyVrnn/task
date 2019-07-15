@@ -7,6 +7,14 @@
     list-style-type: none;
 }
 
+.list-users .list-title{
+    text-align: center;
+}
+
+.users-empty{
+    text-align: center;
+}
+
 .list-users a{
     text-decoration: none;
     color: white;

@@ -59,30 +59,33 @@ class Carousel extends Component {
     const {count, isOpen} = this.state;
     let isActive = true;
     return (
-        <div className="Slider-wrapper">
+        <div className="slider-wrapper">
           {users !== undefined ?
               <>
                 <button
-                    className="Slider-prev"
+                    className="slider-prev"
                     onClick={() => this.addState(-1, users.length - 1)}>
                   &#10094;
                 </button>
-                <div className="Slide-wrapper">
-                  <h2 className="Slide-title">
-                    {users[count] !== undefined ? (
-                        <>
+                <div className="slide-wrapper">
+                  {users[count] !== undefined ? (
+                      <>
+                        <div className="slide-info"
+                             onClick={() => activeUserChanged(users[count].id)}>
                           <Link onClick={this.handleClick} to={`/${users[count].id}`}>
-                            <div onClick={() => activeUserChanged(users[count].id)}>
-                              <User
-                                    isActive={isActive}
-                                    avatar={users[count].avatar}
-                                    name={users[count].name}/>
-                            </div>
+                            <User
+                                isActive={isActive}
+                                avatar={users[count].avatar}
+                                name={users[count].name}/>
                           </Link>
-                        </>
-                    ) : null}
-                  </h2>
-                  <button onClick={this.openModal}>Добавить</button>
+                        </div>
+                      </>
+                  ) : null}
+                  <button className="btn-modal"
+                          onClick={this.openModal}>
+                    <i className="fas fa-plus"></i>
+                    Добавить пользователя
+                  </button>
                   <Modal
                       title={'Добавить пользователя'}
                       isOpen={isOpen}
@@ -93,7 +96,7 @@ class Carousel extends Component {
                   </Modal>
                 </div>
                 <button
-                    className="Slider-next"
+                    className="slider-next"
                     onClick={() => this.addState(1, users.length - 1)}>
                   &#10095;
                 </button>

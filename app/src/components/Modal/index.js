@@ -8,15 +8,15 @@ const Modal = ({title, isOpen, onCancel, children, onSubmit}) => (
     <>
       {isOpen && (
           <Portal>
-            <div className="modalOverlay">
-              <div className="modalWindow">
-                <div className="modalHeader">
-                  <div className="modalTitle">{title}</div>
+            <div className="modal-overlay">
+              <div className="modal-window">
+                <div className="modal-header">
+                  <div className="modal-title">{title}</div>
                 </div>
-                <div className="modalBody">
+                <div className="modal-body">
                   {children}
                 </div>
-                <div className="modalFooter">
+                <div className="modal-footer">
                   <button onClick={onCancel}>Cancel</button>
                   <button onClick={onSubmit}>Submit</button>
                 </div>

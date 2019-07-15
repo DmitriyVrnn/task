@@ -1,4 +1,4 @@
-.modalOverlay {
+.modal-overlay {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
@@ -7,7 +7,7 @@
     right: 0;
 }
 
-.modalWindow {
+.modal-window {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,13 +20,13 @@
     justify-content: space-between;
 }
 
-.modalHeader,
-.modalBody,
-.modalFooter {
+.modal-header,
+.modal-body,
+.modal-footer {
     padding: 10px 20px;
 }
 
-.modalHeader {
+.modal-header {
     min-height: 60px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
@@ -35,16 +35,16 @@
     align-items: center;
 }
 
-.modalTitle {
+.modal-title {
     font-weight: bold;
 }
 
-.modalFooter {
+.modal-footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.modalFooter button:last-child {
+.modal-footer button:last-child {
     margin-left: 10px;
 }

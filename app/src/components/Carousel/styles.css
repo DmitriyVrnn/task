@@ -1,55 +1,22 @@
-body {
-    font-family: Roboto, sans-serif;
+.slider-wrapper {
+    border-radius: 5px;
+    max-width: 250px;
+    min-height: 230px;
+    background: #7986CB;
+    display: flex;
+    align-items: center;
+    margin: 24px auto;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.75);
 }
 
-/* Slide Componenet */
-.Slide-wrapper {
+.slide-wrapper {
     max-width: 960px;
     width: 90%;
+    margin: 0 auto;
     height: 100%;
 }
 
-/* Title */
-.Slide-title {
-    text-align: left;
-    padding: 8px;
-    margin: 0px;
-}
-
-.Slide-link {
-    color: #FF775F;
-}
-
-.Slide-link:hover {
-    color: #FF9683;
-}
-
-/* Body */
-.Slide-desc {
-    padding: 0px 8px 8px 8px;
-    margin: 0px;
-    text-align: left;
-}
-
-/* Images */
-.Slide-img {
-    width: 50px;
-    height: 50px;
-    padding: 8px;
-}
-
-/* Slider Component */
-.Slider-wrapper {
-    width: 100%;
-    max-width: 960px;
-    min-height: 300px;
-    background: #FFD0C7;
-    display: flex;
-    align-items: center;
-}
-
-/* Left & Right Buttons */
-.Slider-prev, .Slider-next {
+.slider-prev, .slider-next {
     cursor: pointer;
     width: 5%;
     padding: 16px;
@@ -62,12 +29,52 @@ body {
     user-select: none;
 }
 
-/* Position the "next button" to the right */
-.Slider-next {
+.slider-next {
     border-radius: 5px 0 0 5px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
-.Slider-prev:hover, .Slider-next:hover {
-    background-color: #FF9683;
+.slider-prev:hover, .slider-next:hover {
+    background-color: #7986CB;
+}
+
+.slide-info{
+    width: 80px;
+    margin: 0 auto;
+}
+
+.slide-info .avatar{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.slide-info a{
+    text-decoration: none;
+}
+
+.slide-info .name{
+    font-family: 'Patua One', cursive;
+    margin-top: 2px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.slide-wrapper .btn-modal{
+    height: 30px;
+    background: #1976D2;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.75);
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+}
+.slide-wrapper .btn-modal:hover{
+    background: #1E88E5;
+}
+
+.slide-wrapper .btn-modal .fa-plus{
+    padding-right: 5px;
 }

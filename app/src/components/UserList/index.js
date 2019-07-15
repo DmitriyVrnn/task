@@ -7,7 +7,7 @@ import User from '../User'
 const UserList = ({users, activeUserChanged}) => {
   if (!users.length) {
     return (
-        <p>
+        <p className="users-empty">
           Пользователи отсутствуют
         </p>
     );
@@ -16,6 +16,7 @@ const UserList = ({users, activeUserChanged}) => {
   return (
       <section className="list">
         <ul className="list-users">
+          <h1 className="list-title">Список сотрудников</h1>
           {users.map(user => {
             const {name, surname, vacancy, avatar, id} = user;
             return (
