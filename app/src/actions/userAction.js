@@ -3,7 +3,7 @@ import uuid from 'uuid';
 
 import {
   FETCH_USERS, API, CHANGE_ACTIVE_USER,
-  GET_USER_FROM_API, ADD_COMMENT, DEFAULT_STATE, ADD_USER
+  GET_USER_FROM_API, ADD_USER
 } from "../constants";
 
 export const changeActiveUser = (id) => {
@@ -11,18 +11,6 @@ export const changeActiveUser = (id) => {
     type: CHANGE_ACTIVE_USER,
     id
   };
-};
-
-export const addComment = data => {
-  return {
-    type: ADD_COMMENT,
-    payload: {
-      id: uuid(),
-      title: data.title,
-      body: data.body,
-      phone: data.phone,
-    },
-  }
 };
 
 export const addUser = data => {
@@ -35,10 +23,6 @@ export const addUser = data => {
     }
   }
 };
-
-export const clearStore = () => ({
-  type: DEFAULT_STATE
-});
 
 export const fetchAllUsers = () => async (dispatch) => {
   const fetchUsers = (users) => {

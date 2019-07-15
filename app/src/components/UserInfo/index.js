@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router';
 
 import CommentList from '../CommentList';
-//import NewComments from '../NewComments';
-import {addComment, clearStore, addUser} from "../../actions/userAction";
+import {addComment, clearCommentFromStore} from "../../actions/commentAction";
+import {addUser} from "../../actions/userAction";
 import './styles.css';
 import Carousel from "../Carousel";
 import User from "../User";
@@ -134,6 +134,6 @@ export default connect(state => ({
   commentConnect: state.comment,
 }), {
   addCommentConnect: addComment,
-  clearStoreConnect: clearStore,
+  clearStoreConnect: clearCommentFromStore,
   addUserConnect: addUser,
 })(UserInfo)
