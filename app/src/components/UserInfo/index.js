@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import InputMask from 'react-input-mask';
 import {connect} from 'react-redux';
 import {Route} from 'react-router';
-import { bindActionCreators } from 'redux'
+import {bindActionCreators} from 'redux'
 
 import CommentList from '../CommentList';
 import {addComment, clearCommentFromStore} from "../../actions/commentAction";
@@ -54,8 +54,8 @@ class UserInfo extends Component {
   };
 
   renderComments = () => {
-    const {user, commentConnect} = this.props;
-    const {comments} = user;
+    const {userConnect, commentConnect} = this.props;
+    const {comments} = userConnect;
     if (comments !== undefined) {
       // Объединение массивов комментариев с сервера и со стейта для отображения
       let newCommentsArray = comments.concat(commentConnect);
@@ -67,14 +67,14 @@ class UserInfo extends Component {
   };
 
   render() {
-    const {user, users, getUserConnect, addUserConnect, clearStoreConnect} = this.props;
-    const {name, surname, address, vacancy, avatar} = user;
+    const {userConnect, usersConnect, getUserConnect, addUserConnect, clearStoreConnect} = this.props;
+    const {name, surname, address, vacancy, avatar} = userConnect;
     const {title, body, phone} = this.state;
     const enabledBtn = title.length >= 5 && title.length <= 80 && body.length <= 128;
     return (
         <>
           <Route path={'/:id'} render={() => {
-            return (<Carousel users={users}
+            return (<Carousel users={usersConnect}
                               activeUserChanged={this.activeUserChanged}
                               getUser={getUserConnect}
                               clearStore={clearStoreConnect}
@@ -132,14 +132,18 @@ class UserInfo extends Component {
 
 const mapStateToProps = (state) => ({
   commentConnect: state.comment,
-  users: state.users.userList,
-  user: state.users.user
+  usersConnect: state.users.userList,
+  userConnect: state.users.user
 });
 
-export default connect(mapStateToProps, {
-  addCommentConnect: addComment,
-  changeActiveUserConnect: changeActiveUser,
-  clearStoreConnect: clearCommentFromStore,
-  addUserConnect: addUser,
-  getUserConnect: getUser,
-})(UserInfo)
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addCommentConnect: addComment,
+    changeActiveUserConnect: changeActiveUser,
+    clearStoreConnect: clearCommentFromStore,
+    addUserConnect: addUser,
+    getUserConnect: getUser,
+  }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo)
