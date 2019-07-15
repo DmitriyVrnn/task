@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Portal from '../Portal';
 import './styles.css'
 
-const Modal = ({title, isOpen, onCancel, children, onSubmit}) => (
+const Modal = ({title, isOpen, onCancel, children}) => (
     <>
       {isOpen && (
           <Portal>
@@ -17,8 +17,7 @@ const Modal = ({title, isOpen, onCancel, children, onSubmit}) => (
                   {children}
                 </div>
                 <div className="modal-footer">
-                  <button onClick={onCancel}>Cancel</button>
-                  <button onClick={onSubmit}>Submit</button>
+                  <button onClick={onCancel}><i className="fas fa-times-circle"></i></button>
                 </div>
               </div>
             </div>

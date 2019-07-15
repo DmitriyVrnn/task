@@ -90,9 +90,9 @@ class Carousel extends Component {
                       title={'Добавить пользователя'}
                       isOpen={isOpen}
                       onCancel={this.handleCancel}
-                      onSubmit={this.handleSubmit}
                   >
-                    <AddUser addUser={addUser}/>
+                    <AddUser addUser={addUser}
+                             onSubmit={this.handleSubmit}/>
                   </Modal>
                 </div>
                 <button
