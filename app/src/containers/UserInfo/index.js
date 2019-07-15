@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router';
 import {bindActionCreators} from 'redux'
 
-import CommentList from '../CommentList';
+import CommentList from '../../components/CommentList/index';
 import {addComment, clearCommentFromStore} from "../../actions/commentAction";
 import {addUser, changeActiveUser, getUser} from "../../actions/userAction";
+import Carousel from "../../components/Carousel";
+import User from "../../components/User";
+
 import './styles.css';
-import Carousel from "../Carousel";
-import User from "../User";
 
 class UserInfo extends Component {
   state = {

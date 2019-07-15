@@ -15,15 +15,16 @@ const CommentList = ({comments}) => {
   return (
       <ul className="list-comments">
         {comments.map(item => {
+          const {title, phone, body} = item;
           if (item !== undefined) {
             return (
                 <article className="comment-wrapper"
                          key={item.id}>
                   <li className="comment">
                     <Comment
-                        title={item.title}
-                        phone={item.phone}
-                        comment={item.body}
+                        title={title}
+                        phone={phone}
+                        comment={body}
                     />
                   </li>
                 </article>

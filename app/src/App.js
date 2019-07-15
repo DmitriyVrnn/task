@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {fetchAllUsers} from "./actions/userAction";
 import './App.css';
-import Container from './containers/Container'
+import Navigation from './components/Navigation'
 
 const App = ({fetchAllUsersConnect}) => {
   useEffect(() => {
@@ -14,7 +14,7 @@ const App = ({fetchAllUsersConnect}) => {
   return (
       <Router>
         <div className="container">
-          <Container/>
+          <Navigation/>
         </div>
       </Router>
   );
